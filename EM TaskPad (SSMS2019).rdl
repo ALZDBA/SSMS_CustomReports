@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="Backups">
+      <ConnectionProperties>
+        <IntegratedSecurity>true</IntegratedSecurity>
+        <ConnectString>Data Source=(local);Initial Catalog=AdventureWorks</ConnectString>
+        <DataProvider>SQL</DataProvider>
+      </ConnectionProperties>
+      <rd:DataSourceID>865d5e72-0a90-4207-8e2d-a7d1f7301841</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <BottomMargin>2.5cm</BottomMargin>
+  <RightMargin>2.5cm</RightMargin>
+  <PageWidth>21cm</PageWidth>
+  <ReportParameters>
+    <ReportParameter Name="ObjectName">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ObjectName</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="ObjectType">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ObjectType</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="ServerName">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ServerName</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="DatabaseName">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>DatabaseName</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>21cm</InteractiveWidth>
+  <rd:GridSpacing>0.25cm</rd:GridSpacing>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <Body>
+    <ColumnSpacing>1cm</ColumnSpacing>
+    <ReportItems>
+      <Textbox Name="textbox30">
+        <Left>0.25cm</Left>
+        <Top>5.25cm</Top>
+        <ZIndex>27</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Used Size:</Value>
+      </Textbox>
+      <Textbox Name="textbox29">
+        <Left>5cm</Left>
+        <Top>5.25cm</Top>
+        <ZIndex>26</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=CStr(FormatNumber(Sum(Fields!UsedMB.Value, "FileSize"),2,True)) + " MB"</Value>
+      </Textbox>
+      <Textbox Name="textbox27">
+        <Left>5cm</Left>
+        <Top>4.75cm</Top>
+        <ZIndex>25</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=CStr(FormatNumber(Sum(Fields!TotalMB.Value, "FileSize"),2,True)) + " MB"</Value>
+      </Textbox>
+      <Textbox Name="textbox28">
+        <Left>0.25cm</Left>
+        <Top>4.75cm</Top>
+        <ZIndex>24</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Total Size:</Value>
+      </Textbox>
+      <Matrix Name="matrix1">
+        <MatrixColumns>
+          <MatrixColumn>
+            <Width>13.75cm</Width>
+          </MatrixColumn>
+        </MatrixColumns>
+        <Left>0.25cm</Left>
+        <RowGroupings>
+          <RowGrouping>
+            <Width>5.5cm</Width>
+            <DynamicRows>
+              <ReportItems>
+                <Textbox Name="Name_1">
+                  <rd:DefaultName>Name_1</rd:DefaultName>
+                  <ZIndex>2</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontSize>8pt</FontSize>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                  </Style>
+                  <CanGrow>true</CanGrow>
+                  <Value>=Fields!Name.Value</Value>
+                </Textbox>
+              </ReportItems>
+              <Grouping Name="matrix1_Name">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Name.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicRows>
+          </RowGrouping>
+          <RowGrouping>
+            <Width>1.75cm</Width>
+            <DynamicRows>
+              <ReportItems>
+                <Textbox Name="TotalMB_1">
+                  <rd:DefaultName>TotalMB_1</rd:DefaultName>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <FontSize>8pt</FontSize>
+                    <Format>#,0.00</Format>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                  </Style>
+                  <CanGrow>true</CanGrow>
+                  <Value>=Fields!TotalMB.Value</Value>
+                </Textbox>
+              </ReportItems>
+              <Grouping Name="matrix1_TotalMB">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!TotalMB.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+            </DynamicRows>
+          </RowGrouping>
+        </RowGroupings>
+        <ColumnGroupings>
+          <ColumnGrouping>
+            <DynamicColumns>
+              <ReportItems>
+                <Textbox Name="textbox34">
+                  <rd:DefaultName>textbox34</rd:DefaultName>
+                  <ZIndex>3</ZIndex>
+                  <Style>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingBottom>2pt</PaddingBottom>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                  </Style>
+                  <CanGrow>true</CanGrow>
+                  <Value />
+                </Textbox>
+              </ReportItems>
+              <Grouping Name="matrix1_ColumnGroup1">
+                <GroupExpressions>
+                  <GroupExpression />
+                </GroupExpressions>
+              </Grouping>
+            </DynamicColumns>
+            <Height>0.25cm</Height>
+          </ColumnGrouping>
+        </ColumnGroupings>
+        <DataSetName>FileSize</DataSetName>
+        <Top>10cm</Top>
+        <ZIndex>23</ZIndex>
+        <Corner>
+          <ReportItems>
+            <Textbox Name="textbox32">
+              <rd:DefaultName>textbox32</rd:DefaultName>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingBottom>2pt</PaddingBottom>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+              </Style>
+              <CanGrow>true</CanGrow>
+              <Value />
+            </Textbox>
+          </ReportItems>
+        </Corner>
+        <Height>0.88492cm</Height>
+        <MatrixRows>
+          <MatrixRow>
+            <Height>0.63492cm</Height>
+            <MatrixCells>
+              <MatrixCell>
+                <ReportItems>
+                  <Chart Name="chart1">
+                    <Legend>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                      </Style>
+                      <Position>RightCenter</Position>
+                    </Legend>
+                    <Subtype>PercentStacked</Subtype>
+                    <Title />
+                    <CategoryAxis>
+                      <Axis>
+                        <Title />
+                        <MajorGridLines>
+                          <Style>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                          </Style>
+                        </MajorGridLines>
+                        <MinorGridLines>
+                          <Style>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                          </Style>
+                        </MinorGridLines>
+                        <Min>0</Min>
+                      </Axis>
+                    </CategoryAxis>
+                    <PointWidth>0</PointWidth>
+                    <ThreeDProperties>
+                      <Rotation>30</Rotation>
+                      <Inclination>30</Inclination>
+                      <Shading>Simple</Shading>
+                      <WallThickness>50</WallThickness>
+                    </ThreeDProperties>
+                    <DataSetName>FileSize</DataSetName>
+                    <SeriesGroupings>
+                      <SeriesGrouping>
+                        <StaticSeries>
+                          <StaticMember>
+                            <Label>Used</Label>
+                          </StaticMember>
+                          <StaticMember>
+                            <Label>Free</Label>
+                          </StaticMember>
+                        </StaticSeries>
+                      </SeriesGrouping>
+                    </SeriesGroupings>
+                    <PlotArea>
+                      <Style>
+                        <BackgroundColor>White</BackgroundColor>
+                      </Style>
+                    </PlotArea>
+                    <ValueAxis>
+                      <Axis>
+                        <Title />
+                        <MajorGridLines>
+                          <Style>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                          </Style>
+                        </MajorGridLines>
+                        <MinorGridLines>
+                          <Style>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                          </Style>
+                        </MinorGridLines>
+                        <Min>0</Min>
+                        <Margin>true</Margin>
+                        <Scalar>true</Scalar>
+                      </Axis>
+                    </ValueAxis>
+                    <Type>Bar</Type>
+                    <CategoryGroupings>
+                      <CategoryGrouping>
+                        <DynamicCategories>
+                          <Grouping Name="chart1_CategoryGroup1">
+                            <GroupExpressions>
+                              <GroupExpression>=Fields!Name.Value</GroupExpression>
+                            </GroupExpressions>
+                          </Grouping>
+                          <Label />
+                        </DynamicCategories>
+                      </CategoryGrouping>
+                    </CategoryGroupings>
+                    <Palette>Excel</Palette>
+                    <ChartData>
+                      <ChartSeries>
+                        <DataPoints>
+                          <DataPoint>
+                            <DataValues>
+                              <DataValue>
+                                <Value>=Sum(Fields!UsedMB.Value)</Value>
+                              </DataValue>
+                            </DataValues>
+                            <DataLabel>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Format>#,0.00</Format>
+                                <Color>White</Color>
+                              </Style>
+                              <Value>=Fields!UsedMB.Value</Value>
+                              <Visible>true</Visible>
+                            </DataLabel>
+                            <Marker>
+                              <Size>6pt</Size>
+                            </Marker>
+                          </DataPoint>
+                        </DataPoints>
+                      </ChartSeries>
+                      <ChartSeries>
+                        <DataPoints>
+                          <DataPoint>
+                            <DataValues>
+                              <DataValue>
+                                <Value>=Sum(Fields!FreeMB.Value)</Value>
+                              </DataValue>
+                            </DataValues>
+                            <DataLabel>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Format>#,0.00</Format>
+                                <Color>White</Color>
+                              </Style>
+                              <Value>=Fields!FreeMB.Value</Value>
+                              <Visible>true</Visible>
+                            </DataLabel>
+                            <Marker>
+                              <Size>6pt</Size>
+                            </Marker>
+                          </DataPoint>
+                        </DataPoints>
+                      </ChartSeries>
+                    </ChartData>
+                    <Style>
+                      <BackgroundColor>White</BackgroundColor>
+                    </Style>
+                  </Chart>
+                </ReportItems>
+              </MatrixCell>
+            </MatrixCells>
+          </MatrixRow>
+        </MatrixRows>
+      </Matrix>
+      <Textbox Name="textbox26">
+        <Left>0.25cm</Left>
+        <Top>9cm</Top>
+        <ZIndex>22</ZIndex>
+        <Width>20.75cm</Width>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+          <TextAlign>Center</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>11pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <BackgroundColor>SteelBlue</BackgroundColor>
+          <Color>White</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.75cm</Height>
+        <Value>="SPACE ALLOCATED (MB)"</Value>
+      </Textbox>
+      <Textbox Name="textbox20">
+        <Left>5cm</Left>
+        <Top>8cm</Top>
+        <ZIndex>21</ZIndex>
+        <Width>10cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=Iif(IsNothing(First(Fields!LastLogBackup.Value, "Backups")),"None",First(Fields!LastLogBackup.Value, "Backups"))</Value>
+      </Textbox>
+      <Textbox Name="textbox21">
+        <Left>5cm</Left>
+        <Top>7.5cm</Top>
+        <ZIndex>20</ZIndex>
+        <Width>10cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=Iif(IsNothing(First(Fields!LastDifferentialBackup.Value, "Backups")),"None",First(Fields!LastDifferentialBackup.Value, "Backups"))</Value>
+      </Textbox>
+      <Textbox Name="textbox22">
+        <Left>5cm</Left>
+        <Top>7cm</Top>
+        <ZIndex>19</ZIndex>
+        <Width>10cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=Iif(IsNothing(First(Fields!LastDatabaseBackup.Value, "Backups")),"None",First(Fields!LastDatabaseBackup.Value, "Backups"))</Value>
+      </Textbox>
+      <Textbox Name="textbox23">
+        <Left>0.25cm</Left>
+        <Top>8cm</Top>
+        <ZIndex>18</ZIndex>
+        <Width>4.75cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Last Log Backup:</Value>
+      </Textbox>
+      <Textbox Name="textbox24">
+        <Left>0.25cm</Left>
+        <Top>7.5cm</Top>
+        <ZIndex>17</ZIndex>
+        <Width>4.75cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Last Differential Backup:</Value>
+      </Textbox>
+      <Textbox Name="textbox25">
+        <Left>0.25cm</Left>
+        <Top>7cm</Top>
+        <ZIndex>16</ZIndex>
+        <Width>4.75cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Last Full Backup:</Value>
+      </Textbox>
+      <Textbox Name="textbox19">
+        <Left>0.25cm</Left>
+        <Top>6cm</Top>
+        <ZIndex>15</ZIndex>
+        <Width>20.75cm</Width>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+          <TextAlign>Center</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>11pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <BackgroundColor>SteelBlue</BackgroundColor>
+          <Color>White</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.75cm</Height>
+        <Value>="MAINTENANCE"</Value>
+      </Textbox>
+      <Textbox Name="textbox3">
+        <Left>5cm</Left>
+        <Top>4.25cm</Top>
+        <ZIndex>14</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=First(Fields!Recovery.Value, "DatabaseProperties")</Value>
+      </Textbox>
+      <Textbox Name="textbox4">
+        <Left>5cm</Left>
+        <Top>3.75cm</Top>
+        <ZIndex>13</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=First(Fields!Status.Value, "DatabaseProperties")</Value>
+      </Textbox>
+      <Textbox Name="textbox5">
+        <Left>5cm</Left>
+        <Top>3.25cm</Top>
+        <ZIndex>12</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=First(Fields!UserAccess.Value, "DatabaseProperties")</Value>
+      </Textbox>
+      <Textbox Name="textbox6">
+        <Left>5cm</Left>
+        <Top>2.75cm</Top>
+        <ZIndex>11</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=First(Fields!Collation.Value, "DatabaseProperties")</Value>
+      </Textbox>
+      <Textbox Name="textbox10">
+        <Left>5cm</Left>
+        <Top>2.25cm</Top>
+        <ZIndex>10</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=Sum(Fields!cmptlevel.Value, "DatabaseProperties")</Value>
+      </Textbox>
+      <Textbox Name="textbox11">
+        <Left>5cm</Left>
+        <Top>1.75cm</Top>
+        <ZIndex>9</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Format>d</Format>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=First(Fields!crdate.Value, "DatabaseProperties")</Value>
+      </Textbox>
+      <Textbox Name="textbox14">
+        <Left>5cm</Left>
+        <Top>1.25cm</Top>
+        <ZIndex>8</ZIndex>
+        <Width>10.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>=First(Fields!Owner.Value, "DatabaseProperties")</Value>
+      </Textbox>
+      <Textbox Name="textbox16">
+        <Left>0.25cm</Left>
+        <Top>4.25cm</Top>
+        <ZIndex>7</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Recovery Model:</Value>
+      </Textbox>
+      <Textbox Name="textbox17">
+        <Left>0.25cm</Left>
+        <Top>3.75cm</Top>
+        <ZIndex>6</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>State:</Value>
+      </Textbox>
+      <Textbox Name="textbox18">
+        <Left>0.25cm</Left>
+        <Top>3.25cm</Top>
+        <ZIndex>5</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>User Access:</Value>
+      </Textbox>
+      <Textbox Name="textbox13">
+        <Left>0.25cm</Left>
+        <Top>2.75cm</Top>
+        <ZIndex>4</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Collation:</Value>
+      </Textbox>
+      <Textbox Name="textbox12">
+        <Left>0.25cm</Left>
+        <Top>2.25cm</Top>
+        <ZIndex>3</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Compatibility:</Value>
+      </Textbox>
+      <Textbox Name="textbox9">
+        <Left>0.25cm</Left>
+        <Top>1.75cm</Top>
+        <ZIndex>2</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Date Created:</Value>
+      </Textbox>
+      <Textbox Name="textbox8">
+        <Left>0.25cm</Left>
+        <Top>1.25cm</Top>
+        <rd:DefaultName>textbox8</rd:DefaultName>
+        <ZIndex>1</ZIndex>
+        <Width>4.5cm</Width>
+        <Style>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>8pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <Color>Gray</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.5cm</Height>
+        <Value>Owner:</Value>
+      </Textbox>
+      <Textbox Name="textbox7">
+        <Left>0.25cm</Left>
+        <Top>0.25cm</Top>
+        <Width>20.75cm</Width>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+          <TextAlign>Center</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>11pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <BackgroundColor>SteelBlue</BackgroundColor>
+          <Color>White</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.75cm</Height>
+        <Value>="DATABASE"</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>11.25cm</Height>
+  </Body>
+  <PageHeader>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <Left>0.25cm</Left>
+        <Top>0.25cm</Top>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Width>20.75cm</Width>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <FontWeight>700</FontWeight>
+          <FontSize>11pt</FontSize>
+          <VerticalAlign>Middle</VerticalAlign>
+          <BackgroundColor>SteelBlue</BackgroundColor>
+          <Color>White</Color>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Value>="EM TASKPAD VIEW FOR [" + Parameters!DatabaseName.Value + "] on server [" + Parameters!ServerName.Value + "]"</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>1cm</Height>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+  </PageHeader>
+  <rd:ReportID>9605d91a-3335-4ee2-a6c6-68f42dce4d19</rd:ReportID>
+  <LeftMargin>2.5cm</LeftMargin>
+  <EmbeddedImages>
+    <EmbeddedImage Name="grey">
+      <ImageData>R0lGODlhAQAOAJEAAGZmZv///////wAAACH5BAUUAAIALAAAAAABAA4AAAIDhI9YADs=</ImageData>
+      <MIMEType>image/gif</MIMEType>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <DataSets>
+    <DataSet Name="Backups">
+      <Query>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <CommandText>set transaction isolation level read uncommitted
+set lock_timeout 10000
+
+select 
+(select max(backup_finish_date) from msdb.dbo.backupset 
+where type = 'D' and database_name = @db) as [LastDatabaseBackup],
+(select max(backup_finish_date) from msdb.dbo.backupset 
+where type = 'I' and database_name = @db) as [LastDifferentialBackup],
+(select max(backup_finish_date) from msdb.dbo.backupset 
+where type = 'L' and database_name = @db) as [LastLogBackup]</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@db">
+            <Value>=Parameters!DatabaseName.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <DataSourceName>Backups</DataSourceName>
+      </Query>
+      <Fields>
+        <Field Name="LastDatabaseBackup">
+          <rd:TypeName>System.DateTime</rd:TypeName>
+          <DataField>LastDatabaseBackup</DataField>
+        </Field>
+        <Field Name="LastDifferentialBackup">
+          <rd:TypeName>System.DateTime</rd:TypeName>
+          <DataField>LastDifferentialBackup</DataField>
+        </Field>
+        <Field Name="LastLogBackup">
+          <rd:TypeName>System.DateTime</rd:TypeName>
+          <DataField>LastLogBackup</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="FileSize">
+      <Query>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <CommandText>set transaction isolation level read uncommitted
+
+/* data file(s) info */
+SELECT case DF.[type] when 0 then 'DATA'
+	   when 1 then 'Log'
+	   when 2 then 'FileStream'
+	   When 3 then 'InternalUsageOnly'
+	   When 4 then 'FullText(preSQL2014)'
+	   Else '---UNDOCUMENTED---'
+	   end AS [Type]
+	, DS.name + ' - ' + DF.name as Name
+	/*, case when DFSU.total_page_count is null then DF.size * 8 / 1024 else DFSU.total_page_count * 8 / 1024 end AS [TotalMB]*/
+	/*, case when DFSU.allocated_extent_page_count is null then DF.size * 8 / 1024 else DFSU.allocated_extent_page_count * 8 / 1024 end AS [UsedMB]*/
+	, size/128 [TotalMB]
+	, CAST(FILEPROPERTY(DF.name, 'SpaceUsed')  AS int)/128  [UsedMB]
+
+FROM sys.database_files DF
+inner join sys.data_spaces DS
+	   on DS.data_space_id = DF.data_space_id
+LEFT JOIN sys.dm_db_file_space_usage DFSU
+	   ON DFSU.file_id = DF.file_id
+where DF.[type] != 1 
+
+UNION ALL
+/* IMOLTP info */
+SELECT 'InMemory_OLTP' AS [Type]
+     , 'IMOLTP' AS Name
+     , sum(ceiling( pages_kb / 1024.0 )) AS [TotalMB]
+     , sum(ceiling( pages_kb / 1024.0 )) AS [UsedMB]
+  FROM sys.dm_os_memory_clerks
+  WHERE type LIKE '%xtp%'
+  and case when name in ( 'default', 'Client-Default' ) then 0
+		  when SUBSTRING(Name, 7,DATALENGTH(name)) = db_id() then 1
+	   else 0
+	   end = 1
+  having sum(ceiling( pages_kb / 1024.0 ))  > 0
+
+union all
+
+/* Log info */
+SELECT 'Log' AS [Type]
+	, 'Log - ' + DF.name
+	, case DF.file_id when 2 then L.LogTotalMB else 1 end as LogTotalMB
+	, case DF.file_id when 2 then L.LogUsedMB else 0 end as LogUsedMB
+
+FROM ( SELECT instance_name AS DatabaseName
+		  , [LOG File(s) Size (KB)] / 1024 AS LogTotalMB
+		  , [Log File(s) Used Size (KB)] / 1024 AS LogUsedMB
+		  FROM(
+			 SELECT *
+				FROM sys.dm_os_performance_counters
+				WHERE counter_name IN( 'Log File(s) Size (KB)', 'Log File(s) Used Size (KB)' )
+				    AND instance_name != '_Total'
+				    AND instance_name = DB_NAME( )
+			 )AS Src 
+		PIVOT( MAX( cntr_value )
+			 FOR counter_name IN( [LOG File(s) Size (KB)], [Log File(s) Used Size (KB)] )
+			 )AS pvt 
+		  )AS L
+	   INNER JOIN sys.database_files DF
+		  ON DF.[type] = 1 /* Log */
+
+order by [Type],[Name];
+</CommandText>
+        <DataSourceName>Backups</DataSourceName>
+      </Query>
+      <Fields>
+        <Field Name="Type">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="Name">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="TotalMB">
+          <rd:TypeName>System.Decimal</rd:TypeName>
+          <DataField>TotalMB</DataField>
+        </Field>
+        <Field Name="UsedMB">
+          <rd:TypeName>System.Decimal</rd:TypeName>
+          <DataField>UsedMB</DataField>
+        </Field>
+        <Field Name="FreeMB">
+          <Value>=Fields!TotalMB.Value-Fields!UsedMB.Value</Value>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DatabaseProperties">
+      <Query>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <CommandText>set transaction isolation level read uncommitted
+set lock_timeout 10000
+
+select suser_sname(d.owner_sid) as [Owner],d.create_date as [crdate],d.compatibility_level as [cmptlevel]
+,d.collation_name as [Collation],d.user_access_desc as [UserAccess],
+d.state_desc as [Status],d.recovery_model_desc as [Recovery]
+from sys.databases d
+where d.[name] = @db</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@db">
+            <Value>=Parameters!DatabaseName.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <DataSourceName>Backups</DataSourceName>
+      </Query>
+      <Fields>
+        <Field Name="Owner">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Owner</DataField>
+        </Field>
+        <Field Name="crdate">
+          <rd:TypeName>System.DateTime</rd:TypeName>
+          <DataField>crdate</DataField>
+        </Field>
+        <Field Name="cmptlevel">
+          <rd:TypeName>System.Byte</rd:TypeName>
+          <DataField>cmptlevel</DataField>
+        </Field>
+        <Field Name="Collation">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Collation</DataField>
+        </Field>
+        <Field Name="UserAccess">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>UserAccess</DataField>
+        </Field>
+        <Field Name="Status">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="Recovery">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Recovery</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <Width>21.25cm</Width>
+  <InteractiveHeight>29.7cm</InteractiveHeight>
+  <Language>en-US</Language>
+  <TopMargin>2.5cm</TopMargin>
+  <PageHeight>29.7cm</PageHeight>
+</Report>
